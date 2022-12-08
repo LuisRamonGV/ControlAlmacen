@@ -128,6 +128,40 @@ app.get('/listProdbyNameAsc', function(req, res){
     });
 });
 
+app.post('/listUser', function(req, res){
+    var sql = "SELECT * FROM usuario ORDER BY usu_nombres ASC";
+    db.query(sql, function(error, result){
+        if(error){
+            res.write(JSON.stringify({
+                error: true,
+                error_object: error
+            }));
+            res.end();
+        }
+        else {
+            res.write(JSON.stringify(result));
+            res.end();
+        }
+    });
+});
+
+app.post('/listRecords', function(req, res){
+    var sql = "SELECT * FROM registros";
+    db.query(sql, function(error, result){
+        if(error){
+            res.write(JSON.stringify({
+                error: true,
+                error_object: error
+            }));
+            res.end();
+        }
+        else{
+            res.write(JSON.stringify(result));
+            res.end();
+        }
+    });
+});
+
 app.post('/insertProd', function(req, res, next){
     var nombre = req.body.nombre;
     var tipo = req.body.tipo;
